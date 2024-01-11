@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReceptWeb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/main.css">
+</head>
+<body>
+    <header class="container">
+        <a href="./index.html"><h1>ReceptWeb</h1></a>
+    </header>
+    <main class="container">
+        <form id="filter">
+            <label for="recipeQuery"><strong>Zoek een recept:</strong></label>
+            <input type="text" id="recipeQuery" name="search">
+            <button type="submit">Zoeken</button>
+        </form>
+        <h2>All Recipes</h2>
+        <div id="recipes">
+            <div>Loading</div>
+        </div>
+    </main>
+    <footer class="container">
+
+    </footer>
+    <script src="./static/js/main.js"></script>
+</body>
+</html>

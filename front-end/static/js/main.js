@@ -31,19 +31,19 @@ function renderData(data) {
 };
 
 function renderItem($recipesElement, item) {
-    const $recipeItemElement = document.createElement('article')
-    $recipeItemElement.innerHTML = `
-    <div class="recipe__inner">
-        <h3>🍝  ${item.title}</h3>
-        <strong>🤔  What do you need?</strong>
-        <p>${item.ingredients}</p>
-        <strong>👨‍👩‍👧‍👦  Servings</strong>
-        <p>${item.servings}</p>
-        <strong>📖  Instructions</strong>
-        <p>${item.instructions}</p>
-    </div>
+    $recipesElement.innerHTML += `
+    <a href="./detail.html?recipe=${item.title}" class="recipe__inner">
+        <article>
+            <h3>🍝  ${item.title}</h3>
+            <strong>🤔  What do you need?</strong>
+            <p>${item.ingredients}</p>
+            <strong>👨‍👩‍👧‍👦  Servings</strong>
+            <p>${item.servings}</p>
+            <strong>📖  Instructions</strong>
+            <p>${item.instructions}</p>
+        </article>
+    </a>
     `;
-    $recipesElement.appendChild($recipeItemElement);
 };
 
 function initialize() {
