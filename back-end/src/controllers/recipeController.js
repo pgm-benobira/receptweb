@@ -16,13 +16,17 @@ async function getRecipesFromFile(filePath) {
         const data = await fsp.readFile(filePath);
         return JSON.parse(data);
     } catch (error) {
-        return `Failed to read/parse file: ${error.message}`
+        return `Lezen en/of parsen van het bestand niet gelukt: ${error.message}`
     }
 };
 
 // Upload the edited file again
 async function uploadRecipesToFile(filePath, recipes) {
-    return await fsp.writeFile(filePath, JSON.stringify(recipes, null, 4));
+    try {
+        return await fsp.writeFile(filePath, JSON.stringify(recipes, null, 4));
+    } catch (error) {
+        return `Het bestand updaten is niet gelukt: ${error.message}`
+    }
 };
 
 // ---------------- RECIPES FILEPATH ----------------------------------------------------------------------------------------------------------------------
@@ -47,8 +51,11 @@ async function getRecipe(request, response) {
         const {id} = request.params;
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
-        // Find recipe with given id
+        // Find recipe with given id (only if it exist)
         const recipe = recipes.find((recipe) => JSON.stringify(recipe.id) === id);
+        if (recipe === undefined) {
+            response.send(`Geen recept gevonden met de id:${id}`)
+        }
         // Give back the recipe with the correct id
         response.json(recipe);
     } catch (error) {
@@ -61,7 +68,12 @@ async function addRecipe(request, response) {
     try {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
-        // Push the new recipe to the rest of the recipes
+        // Push the new recipe to the rest of the recipes (only if the body is not empty en there is no id)
+        if (Object.keys(request.body).length === 0) {
+            response.send('Gelieve een recept mee te geven!')
+        } else if ("id" in request.body) {
+            response.send('Je hebt geen toestemming om een id mee te geven!')
+        }
         recipes.push({
             ...request.body,
             id: generateRandomId()
@@ -82,13 +94,16 @@ async function editRecipe(request, response) {
         const {id} = request.params;
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
-        // Find recipe with given id
+        // Find recipe with given id (only if it exist)
         const recipeIndex = recipes.findIndex((recipe) => JSON.stringify(recipe.id) === id);
+        if (recipeIndex === -1) {
+            response.send(`Geen recept gevonden met de id:${id}`)
+        }
         // Replace the old recipe with the new updated
         recipes[recipeIndex] = {
             ...recipes[recipeIndex],
             ...request.body
-        }
+        };
 
         // Upload the edited file again
         await uploadRecipesToFile(recipesFilePath, recipes);
@@ -107,10 +122,14 @@ async function removeRecipe(request, response) {
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id and filter it out
         const filteredRecipes = recipes.filter((recipe) => JSON.stringify(recipe.id) !== id);
+        // If the array is still the same length then no recipe was deleted
+        if (filteredRecipes.length === recipes.length) {
+            response.send(`Geen recept gevonden met de id:${id} om te verwijderen`)
+        }
 
         // Upload the edited file again
         await uploadRecipesToFile(recipesFilePath, filteredRecipes);
-        response.send(`Recept met naam ${request.body.title} is verwijdert.`);
+        response.send(`Recept met id:${id} is verwijdert.`);
     } catch (error) {
         showErrorMessage(response, error);
     }
@@ -124,7 +143,10 @@ async function getCategories(request, response) {
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Extract unique categories
         const categories = [...new Set(recipes.map(recipe => recipe.category))];
-        // Give back the recipes categories
+        // Give back the recipes categories (only if they exist)
+        if (categories.length === 0) {
+            response.send('Geen categorieën gevonden');
+        }
         response.json(categories);
     } catch (error) {
         showErrorMessage(response, error);
@@ -138,7 +160,10 @@ async function getIngredients(request, response) {
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Extract unique ingredients
         const ingredients = [...new Set(recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.name)))];
-        // Give back the recipes ingredients
+        // Give back the recipes ingredients (only if they exist)
+        if (ingredients.length === 0) {
+            response.send('Geen ingrediënten gevonden');
+        }
         response.json(ingredients)
     } catch (error) {
         showErrorMessage(response, error);
@@ -153,6 +178,9 @@ async function getDifficultyLevels(request, response) {
         // Extract unique difficultyLevels
         const difficultyLevels = [...new Set(recipes.map(recipe => recipe.difficulty))];
         // Give back the recipes difficultyLevels
+        if (difficultyLevels.length === 0) {
+            response.send('Geen moeilijkheidsgraden gevonden');
+        }
         response.json(difficultyLevels);
     } catch (error) {
         showErrorMessage(response, error);
