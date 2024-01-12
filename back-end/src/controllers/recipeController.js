@@ -110,7 +110,7 @@ async function removeRecipe(request, response) {
 
         // Upload the edited file again
         await uploadRecipesToFile(recipesFilePath, filteredRecipes);
-        response.send(`Nieuwe recept met naam ${request.body.title} is toegevoegd.`);
+        response.send(`Recept met naam ${request.body.title} is verwijdert.`);
     } catch (error) {
         showErrorMessage(response, error);
     }

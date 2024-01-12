@@ -1,17 +1,10 @@
-const API_URL = 'https://api.api-ninjas.com/v1/recipe?query=pasta'
-const options = {
-    method: 'GET',
-    headers: {
-        'X-Api-Key': 'UmGdvbARfQ41r9BOpvxJpA==gEsNGQrVYWk9UNRj'
-    },
-    contentType: 'application/json'
-};
+// ---------------- API URL -------------------------------------------------------------------------------------------------------------------------------
+const API_URL = 'http://localhost:8989/api/recipes';
 
-const $recipesElement = document.getElementById('recipes')
-
+// ---------------- FETCH THE DATA ------------------------------------------------------------------------------------------------------------------------
 async function fetchData(url, callback) {
     try {
-        const response = await fetch(url, options)
+        const response = await fetch(url)
         if (response.status === 200) {
             const data = await response.json();
             callback(data)
@@ -23,31 +16,48 @@ async function fetchData(url, callback) {
     }
 };
 
-function renderData(data) {
-    $recipesElement.innerHTML = '';
-    data.forEach(item => {
-        renderItem($recipesElement, item)
+// ---------------- REQUIRE -------------------------------------------------------------------------------------------------------------------------------
+import { renderData } from './recipes.js';
+
+// ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
+const $recipesElement = document.getElementById('recipes');
+const $formElement = document.getElementById('filterRecipe');
+
+// ---------------- HANDLE FORM ---------------------------------------------------------------------------------------------------------------------------
+function filterRecipesByValue(recipes, value) {
+    return recipes.filter((recipe) => {
+        return (
+            recipe.title.toLowerCase().includes(value.toLowerCase()) ||
+            recipe.category.toLowerCase().includes(value.toLowerCase())
+        )
     });
 };
 
-function renderItem($recipesElement, item) {
-    $recipesElement.innerHTML += `
-    <a href="./detail.html?recipe=${item.title}" class="recipe__inner">
-        <article>
-            <h3>🍝  ${item.title}</h3>
-            <strong>🤔  What do you need?</strong>
-            <p>${item.ingredients}</p>
-            <strong>👨‍👩‍👧‍👦  Servings</strong>
-            <p>${item.servings}</p>
-            <strong>📖  Instructions</strong>
-            <p>${item.instructions}</p>
-        </article>
-    </a>
-    `;
+function handleFormSubmit(recipes, $form) {
+    const formData = new FormData($form);
+    const formDataValue = formData.get('filter');
+    console.log(filterRecipesByValue(recipes, formDataValue));
 };
 
-function initialize() {
-    fetchData(API_URL, renderData)
-}
+function submitEvent(recipes) {
+    $formElement.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        handleFormSubmit(recipes, $formElement);
+    })
+};
 
-initialize()
+// ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
+// Start the application
+async function initialize () {
+    const api = API_URL;
+    fetchData(api, data => {
+        // Handling the form event
+        submitEvent(data)
+        // Show all recipes
+        renderData($recipesElement, data)
+    });
+    // Console checks
+};
+
+// Call the function for the application
+initialize();
