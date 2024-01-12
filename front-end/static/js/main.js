@@ -1,23 +1,9 @@
 // ---------------- API URL -------------------------------------------------------------------------------------------------------------------------------
 const API_URL = 'http://localhost:8989/api/recipes';
 
-// ---------------- FETCH THE DATA ------------------------------------------------------------------------------------------------------------------------
-async function fetchData(url, callback) {
-    try {
-        const response = await fetch(url)
-        if (response.status === 200) {
-            const data = await response.json();
-            callback(data)
-        } else {
-            throw new Error('Er ging iets mis met de API.')
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
-};
-
 // ---------------- REQUIRE -------------------------------------------------------------------------------------------------------------------------------
-import { renderData } from './recipes.js';
+import { fetchData } from './helpers/fetch.js';
+import { renderData } from './helpers/recipes.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $recipesElement = document.getElementById('recipes');
@@ -57,7 +43,6 @@ async function initialize () {
         // Show all recipes
         renderData($recipesElement, data)
     });
-    // Console checks
 };
 
 // Call the function for the application

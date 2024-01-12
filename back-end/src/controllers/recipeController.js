@@ -54,6 +54,7 @@ async function getRecipe(request, response) {
         // Find recipe with given id (only if it exist)
         const recipe = recipes.find((recipe) => JSON.stringify(recipe.id) === id);
         if (recipe === undefined) {
+            response.status(404)
             response.send(`Geen recept gevonden met de id:${id}`)
         }
         // Give back the recipe with the correct id
@@ -70,8 +71,10 @@ async function addRecipe(request, response) {
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Push the new recipe to the rest of the recipes (only if the body is not empty en there is no id)
         if (Object.keys(request.body).length === 0) {
+            response.status(400)
             response.send('Gelieve een recept mee te geven!')
         } else if ("id" in request.body) {
+            response.status(403)
             response.send('Je hebt geen toestemming om een id mee te geven!')
         }
         recipes.push({
@@ -97,6 +100,7 @@ async function editRecipe(request, response) {
         // Find recipe with given id (only if it exist)
         const recipeIndex = recipes.findIndex((recipe) => JSON.stringify(recipe.id) === id);
         if (recipeIndex === -1) {
+            response.status(404)
             response.send(`Geen recept gevonden met de id:${id}`)
         }
         // Replace the old recipe with the new updated
@@ -124,6 +128,7 @@ async function removeRecipe(request, response) {
         const filteredRecipes = recipes.filter((recipe) => JSON.stringify(recipe.id) !== id);
         // If the array is still the same length then no recipe was deleted
         if (filteredRecipes.length === recipes.length) {
+            response.status(404)
             response.send(`Geen recept gevonden met de id:${id} om te verwijderen`)
         }
 
@@ -145,6 +150,7 @@ async function getCategories(request, response) {
         const categories = [...new Set(recipes.map(recipe => recipe.category))];
         // Give back the recipes categories (only if they exist)
         if (categories.length === 0) {
+            response.status(404)
             response.send('Geen categorieën gevonden');
         }
         response.json(categories);
@@ -162,6 +168,7 @@ async function getIngredients(request, response) {
         const ingredients = [...new Set(recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.name)))];
         // Give back the recipes ingredients (only if they exist)
         if (ingredients.length === 0) {
+            response.status(404)
             response.send('Geen ingrediënten gevonden');
         }
         response.json(ingredients)
@@ -179,6 +186,7 @@ async function getDifficultyLevels(request, response) {
         const difficultyLevels = [...new Set(recipes.map(recipe => recipe.difficulty))];
         // Give back the recipes difficultyLevels
         if (difficultyLevels.length === 0) {
+            response.status(404)
             response.send('Geen moeilijkheidsgraden gevonden');
         }
         response.json(difficultyLevels);

@@ -1,57 +1,30 @@
-const API_URL = 'https://api.api-ninjas.com/v1/recipe?query=pasta'
-const options = {
-    method: 'GET',
-    headers: {
-        'X-Api-Key': 'UmGdvbARfQ41r9BOpvxJpA==gEsNGQrVYWk9UNRj'
-    },
-    contentType: 'application/json'
-};
+// ---------------- API URL -------------------------------------------------------------------------------------------------------------------------------
+const API_URL = 'http://localhost:8989/api/recipes/';
 
-const $detailRecipeElement = document.getElementById('detail-recipe')
+// ---------------- REQUIRE -------------------------------------------------------------------------------------------------------------------------------
+import { fetchData } from './helpers/fetch.js';
+import { renderDetailItem } from './helpers/recipes.js';
 
-async function fetchData(url, callback) {
-    try {
-        const response = await fetch(url, options)
-        if (response.status === 200) {
-            const data = await response.json();
-            callback(data)
-        } else {
-            throw new Error('Er ging iets mis met de API.')
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
-};
+// ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
+const $recipeDetailElement = document.getElementById('recipe-detail');
 
-const urlParams = new URLSearchParams(window.location.search);
-let selectedRecipe = urlParams.get('recipe');
-
-function filteredEventsByRecipe(recipes, selectedRecipe) {
-    return recipes.filter((recipe) => recipe.title === selectedRecipe);
-};
-
-function generateHTMLForRecipe (item) {
-    return `
-    <h2>🍝  ${item.title}</h2>
-    <strong>🤔  What do you need?</strong>
-    <p>${item.ingredients}</p>
-    <strong>👨‍👩‍👧‍👦  Servings</strong>
-    <p>${item.servings}</p>
-    <strong>📖  Instructions</strong>
-    <p>${item.instructions}</p>
-    `
+// ---------------- GET THE SELECTED ID -------------------------------------------------------------------------------------------------------------------
+function getSelectedRecipeId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
 }
 
-function renderRecipeDetail(data) {
-    const filteredRecipe = filteredEventsByRecipe(data, selectedRecipe);
-    console.log(filteredRecipe[0]);
-    $detailRecipeElement.innerHTML = generateHTMLForRecipe(filteredRecipe[0]);
-}
+// ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
+// Start the application
+async function initialize () {
+    const selectedId = getSelectedRecipeId();
+    console.log(selectedId);
+    const api = API_URL + selectedId;
+    fetchData(api, data => {
+        // Show the recipe detail from the id
+        renderDetailItem($recipeDetailElement, data)
+    });
+};
 
-function initialize() {
-    fetchData(API_URL, data => {
-        renderRecipeDetail(data)})
-    console.log('Geselecteerd recept', selectedRecipe)
-}
-
-initialize()
+// Call the function for the application
+initialize();
