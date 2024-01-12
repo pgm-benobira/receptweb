@@ -8,7 +8,7 @@ router.post('/recipes', userController.addRecipe);
 router.put('/recipes/:id', userController.editRecipe);
 router.delete('/recipes/:id', userController.removeRecipe);
 
-// Exceleren
+// ================ EXCELEREN =============================================================================================================================
 router.get('/categories', userController.getCategories);
 router.get('/ingredients', userController.getIngredients);
 router.get('/difficulty-levels', userController.getDifficultyLevels);
