@@ -36,7 +36,8 @@ function filterRecipesByValue(recipes, value) {
 function handleFormSubmit(recipes, $form) {
     const formData = new FormData($form);
     const formDataValue = formData.get('filter');
-    console.log(filterRecipesByValue(recipes, formDataValue));
+    const filteredRecipesData = filterRecipesByValue(recipes, formDataValue);
+    return renderData($recipesElement, filteredRecipesData);
 };
 
 function submitEvent(recipes) {
