@@ -23,6 +23,11 @@ function handleFormSubmit(recipes, $form) {
     const formData = new FormData($form);
     const formDataValue = formData.get('filter');
     const filteredRecipesData = filterRecipesByValue(recipes, formDataValue);
+    if (filteredRecipesData.length === 0) {
+        $recipesElement.innerHTML = `
+        <p>Geen resultaten gevonden</p>
+        `
+    }
     return renderData($recipesElement, filteredRecipesData);
 };
 
