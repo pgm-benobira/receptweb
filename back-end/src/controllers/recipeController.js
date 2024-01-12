@@ -1,6 +1,6 @@
 const fsp = require('fs/promises');
-const path = require('path')
-const { v4: generateRandomId } = require('uuid')
+const path = require('path');
+const { v4: generateRandomId } = require('uuid');
 
 // ---------------- REUSED FUNCTIONS ----------------------------------------------------------------------------------------------------------------------
 // Set status to 500 and show error message

@@ -13,4 +13,5 @@ router.get('/categories', userController.getCategories);
 router.get('/ingredients', userController.getIngredients);
 router.get('/difficulty-levels', userController.getDifficultyLevels);
 
+// ---------------- EXPORT MODULES ------------------------------------------------------------------------------------------------------------------------
 module.exports = router;
