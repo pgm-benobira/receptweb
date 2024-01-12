@@ -83,9 +83,12 @@ async function editRecipe(request, response) {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id
-        const recipe = recipes.find((recipe) => JSON.stringify(recipe.id) === id);
+        const recipeIndex = recipes.findIndex((recipe) => JSON.stringify(recipe.id) === id);
         // Replace the old recipe with the new updated
-        
+        recipes[recipeIndex] = {
+            ...recipes[recipeIndex],
+            ...request.body
+        }
 
         // Upload the edited file again
         await uploadRecipesToFile(recipesFilePath, recipes);
@@ -102,11 +105,11 @@ async function removeRecipe(request, response) {
         const {id} = request.params;
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
-        // Find recipe with given id
-        const recipe = recipes.find((recipe) => JSON.stringify(recipe.id) === id);
+        // Find recipe with given id and filter it out
+        const filteredRecipes = recipes.filter((recipe) => JSON.stringify(recipe.id) !== id);
 
         // Upload the edited file again
-        await uploadRecipesToFile(recipesFilePath, recipes);
+        await uploadRecipesToFile(recipesFilePath, filteredRecipes);
         response.send(`Nieuwe recept met naam ${request.body.title} is toegevoegd.`);
     } catch (error) {
         showErrorMessage(response, error);
