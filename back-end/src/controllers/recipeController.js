@@ -52,7 +52,8 @@ async function getRecipe(request, response) {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id (only if it exist)
-        const recipe = recipes.find((recipe) => JSON.stringify(recipe.id) === id);
+        const recipe = recipes.find((recipe) => recipe.id == id);
+        console.log(id);
         if (recipe === undefined) {
             response.status(404)
             response.send(`Geen recept gevonden met de id:${id}`)
@@ -98,7 +99,7 @@ async function editRecipe(request, response) {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id (only if it exist)
-        const recipeIndex = recipes.findIndex((recipe) => JSON.stringify(recipe.id) === id);
+        const recipeIndex = recipes.findIndex((recipe) => recipe.id == id);
         if (recipeIndex === -1) {
             response.status(404)
             response.send(`Geen recept gevonden met de id:${id}`)
@@ -125,7 +126,7 @@ async function removeRecipe(request, response) {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id and filter it out
-        const filteredRecipes = recipes.filter((recipe) => JSON.stringify(recipe.id) !== id);
+        const filteredRecipes = recipes.filter((recipe) => recipe.id != id);
         // If the array is still the same length then no recipe was deleted
         if (filteredRecipes.length === recipes.length) {
             response.status(404)

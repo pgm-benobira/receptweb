@@ -1348,33 +1348,5 @@
         "cookingTime": 50,
         "difficulty": "Gemakkelijk",
         "servings": 8
-    },
-    {
-        "title": "test",
-        "category": "test",
-        "ingredients": [
-            {
-                "name": "test"
-            }
-        ],
-        "instructions": "test",
-        "cookingTime": "20",
-        "difficulty": "Gemakkelijk",
-        "servings": "4",
-        "id": "188cc80c-02df-4773-bee2-68c0adc668d7"
-    },
-    {
-        "title": "test",
-        "category": "test",
-        "ingredients": [
-            {
-                "name": "test"
-            }
-        ],
-        "instructions": "test",
-        "cookingTime": "20",
-        "difficulty": "Gemakkelijk",
-        "servings": "4",
-        "id": "bc999408-abef-4648-bea1-af2335c2a343"
     }
 ]
