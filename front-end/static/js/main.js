@@ -1,7 +1,7 @@
 // ---------------- API URL -------------------------------------------------------------------------------------------------------------------------------
 const API_URL = 'http://localhost:8989/api/recipes';
 
-// ---------------- REQUIRE -------------------------------------------------------------------------------------------------------------------------------
+// ---------------- IMPORT --------------------------------------------------------------------------------------------------------------------------------
 import { fetchData } from './helpers/fetch.js';
 import { renderData } from './helpers/recipes.js';
 
@@ -24,9 +24,7 @@ function handleFormSubmit(recipes, $form) {
     const formDataValue = formData.get('filter');
     const filteredRecipesData = filterRecipesByValue(recipes, formDataValue);
     if (filteredRecipesData.length === 0) {
-        $recipesElement.innerHTML = `
-        <p>Geen resultaten gevonden</p>
-        `
+        return $recipesElement.innerHTML = `<p>Geen resultaten voor "<strong>${formDataValue}</strong>"</p>`
     }
     return renderData($recipesElement, filteredRecipesData);
 };
