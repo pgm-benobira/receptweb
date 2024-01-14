@@ -14,11 +14,20 @@ function renderItemContent(item) {
     </article>
     `
 }
+
+function renderDeleteEditItem() {
+    return `
+    <button>Recept aanpassen</button>
+    <button id="deleteRecipe" class="secondary outline">Verwijder recept</button>
+    `
+};
+
 function renderItem($element, item) {
     $element.innerHTML += `
     <a href="./detail.html?id=${item.id}" class="recipe__inner">
         ${renderItemContent(item)}
     </a>
+    ${renderDeleteEditItem()}
     `;
 };
 
@@ -29,6 +38,7 @@ export function renderDetailItem($element, item) {
     <div class="recipe__inner">
         ${renderItemContent(item)}
     </div>
+    ${renderDeleteEditItem()}
     `;
 };
 
