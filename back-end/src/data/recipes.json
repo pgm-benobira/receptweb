@@ -22,9 +22,9 @@
             }
         ],
         "instructions": "Kook de spaghetti en bak het spek. Meng de eieren en kaas. Giet de saus over de spaghetti en meng met spek.",
-        "cookingTime": 20,
+        "cookingTime": "20",
         "difficulty": "Gemakkelijk",
-        "servings": 2
+        "servings": "2"
     },
     {
         "id": 2,

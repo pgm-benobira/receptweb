@@ -1,13 +1,42 @@
 // ---------------- API URL -------------------------------------------------------------------------------------------------------------------------------
-const API_URL = 'http://localhost:8989/api/recipes';
+const API_URL = 'http://localhost:8989/api/';
 
 // ---------------- IMPORT --------------------------------------------------------------------------------------------------------------------------------
 import { fetchData } from './helpers/fetch.js';
-import { renderData } from './helpers/recipes.js';
+import { renderData } from './helpers/rendering/recipes.js';
+import { renderCategories } from './helpers/rendering/categories.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $recipesElement = document.getElementById('recipes');
 const $formElement = document.getElementById('filterRecipe');
+const $categoriesElement = document.getElementById('categories');
+const $resetButton = document.getElementById('resetFilters');
+
+// ---------------- FILTER ON CATEGORY --------------------------------------------------------------------------------------------------------------------
+function filterRecipesByCategory(recipes, selectedCategory) {
+    return recipes.filter((recipe) => recipe.category === selectedCategory)
+};
+
+function resetRecipesFitlter(data) {
+    $resetButton.addEventListener('click', () => {
+        renderData($recipesElement, data);
+    });
+};
+
+function showFilteredRecipes(data) {
+    // Add click event listener to each category button
+    const $categoryButtons = document.querySelectorAll('.category-button');
+    $categoryButtons.forEach(($categoryButton) => {
+        $categoryButton.addEventListener('click', () => {
+            const selectedCategory = $categoryButton.dataset.category; // Assuming data-category attribute contains the category value
+            const filteredRecipes = filterRecipesByCategory(data, selectedCategory);
+            // Show the filtered recipes
+            renderData($recipesElement, filteredRecipes);
+        });
+    });
+    // Reset the applied filter
+    resetRecipesFitlter(data);
+};
 
 // ---------------- HANDLE FORM ---------------------------------------------------------------------------------------------------------------------------
 function filterRecipesByValue(recipes, value) {
@@ -39,12 +68,17 @@ function submitEvent(recipes) {
 // ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
 // Start the application
 async function initialize () {
-    const api = API_URL;
-    fetchData(api, data => {
+    fetchData(`${API_URL}categories`, data => {
+        // Show all categories
+        renderCategories($categoriesElement, data);
+    });
+    fetchData(`${API_URL}recipes`, data => {
         // Handling the form event
-        submitEvent(data)
+        submitEvent(data);
         // Show all recipes
-        renderData($recipesElement, data)
+        renderData($recipesElement, data);
+        // Show filtered recipes
+        showFilteredRecipes(data);
     });
 };
 

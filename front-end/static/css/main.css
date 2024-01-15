@@ -1,0 +1,10 @@
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-button {
+    max-width: 8rem;
+    width: 100%;
+    margin: 0.4rem;
+}

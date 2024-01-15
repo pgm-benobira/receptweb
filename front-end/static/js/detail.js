@@ -3,7 +3,7 @@ const API_URL = 'http://localhost:8989/api/recipes';
 
 // ---------------- REQUIRE -------------------------------------------------------------------------------------------------------------------------------
 import { fetchData } from './helpers/fetch.js';
-import { renderDetailItem, renderEditDetailForm } from './helpers/recipes.js';
+import { renderDetailItem, renderEditDetailForm } from './helpers/rendering/recipes.js';
 import { putData } from './helpers/put.js';
 import { deleteData } from './helpers/delete.js';
 
@@ -70,14 +70,14 @@ function handleFormSubmit($form) {
 
     putData(`${API_URL}/${getSelectedRecipeId()}`, recipe).then(
         (onFulfilled) => {
-            $formPage.innerHTML = ''
-            $formPage.innerHTML = `
+            $mainElement.innerHTML = ''
+            $mainElement.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is gelukt!</p>
             `
         },
         (onRejected) => {
-            $formPage.innerHTML = ''
-            $formPage.innerHTML = `
+            $mainElement.innerHTML = ''
+            $mainElement.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is niet gelukt!</p>
             <a href="../index.html" role="button">Opnieuw proberen?</a>
             `
