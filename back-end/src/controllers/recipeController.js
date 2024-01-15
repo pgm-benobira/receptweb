@@ -53,7 +53,6 @@ async function getRecipe(request, response) {
         const recipes = await getRecipesFromFile(recipesFilePath);
         // Find recipe with given id (only if it exist)
         const recipe = recipes.find((recipe) => recipe.id == id);
-        console.log(id);
         if (recipe === undefined) {
             response.status(404)
             response.send(`Geen recept gevonden met de id:${id}`)

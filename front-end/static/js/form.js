@@ -40,8 +40,6 @@ function handleFormSubmit($form) {
 
     postData(API_URL, recipe).then(
         (onFulfilled) => {
-            alert(`Recept: "${recipeTitle}" toevoegen is gelukt`);
-            // Not working because of live server ev.preventDefault bug
             $formPage.innerHTML = ''
             $formPage.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> toevoegen is gelukt!</p>
@@ -58,17 +56,17 @@ function handleFormSubmit($form) {
     )
 };
 
-function submitEvent() {
-    $addRecipeFormElement.addEventListener('submit', (ev) => {
+function submitEvent($form) {
+    $form.addEventListener('submit', (ev) => {
         ev.preventDefault();
-        handleFormSubmit($addRecipeFormElement);
+        handleFormSubmit($form);
     })
 };
 
 // ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
 // Start the application
 async function initialize () {
-    submitEvent();
+    submitEvent($addRecipeFormElement);
 };
 
 // Call the function for the application
