@@ -1,3 +1,87 @@
+:root {
+    --turqoise: hsl(161, 84%, 59%);
+    --mint: hsl(154, 62%, 87%);
+    --pine: hsl(163, 38%, 9%);
+    --white: hsl(34, 100%, 99%);
+    --dark: hsl(164, 17%, 21%);
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-SemiBold.woff2') format('woff2'),
+        url('../fonts/Poppins/Poppins-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Regular.woff2') format('woff2'),
+        url('../fonts/Poppins/Poppins-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════════════
+════════════════════════════════════════ GENERAL ════════════════════════════════════════
+══════════════════════════════════════════════════════════════════════════════════════ */
+
+body {
+    font-family: 'Poppins';
+    background: var(--white);
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 2.9rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: normal;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 2.2rem;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    all: unset;
+    font-weight: 600;
+}
+
+button:hover {
+    cursor: pointer;
+    color: var(--turqoise);
+}
+
+input, textarea, select {
+    all: unset;
+    border: 3px solid var(--mint);
+    border-radius: 18px;
+    padding: 1rem;
+}
+
 .categories {
     display: flex;
     flex-wrap: wrap;
