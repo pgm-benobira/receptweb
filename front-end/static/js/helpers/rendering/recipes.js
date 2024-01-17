@@ -1,31 +1,30 @@
 // ---------------- RENDER ONE RECIPE ---------------------------------------------------------------------------------------------------------------------
 function renderItemContent(item) {
     return `
-    <article>
-        <h3>${item.title}</h3>
-        <p><strong>🤔  Wat heb je nodig?</strong></p>
-        <ul>
-        ${item.ingredients.map(ingredient => `<li>${ingredient.name}: ${ingredient.amount}</li>`).join('\n')}
-        </ul>
-        <p><strong>👨‍👩‍👧‍👦  Voor hoeveel mensen?</strong></p>
-        <p>${item.servings}</p>
-        <p><strong>📖  Instructies:</strong></p>
-        <p>${item.instructions}</p>
-        <p><strong>⏱️  Kooktijd:</strong></p>
-        <p>${item.cookingTime}</p>
-        <p><strong>💥  Moeilijkheidsgraad:</strong></p>
-        <p>${item.difficulty}</p>
-        <p><strong>🍽️  Categorie:</strong></p>
-        <p>${item.category}</p>
-    </article>
+    <a href="./detail.html?id=${item.id}" class="recipe-teaser">
+        <div class ="recipe-top">
+            <h3>${item.title}</h3>
+            <div class="quick-info">
+                <p class="servings">${item.servings} pers.</p>
+                <p class="cookingTime">${item.cookingTime} min.</p>
+            </div>
+        </div>
+        <div class ="recipe-middle">
+            <p class="ingredients"><strong>Nodig:</strong> ${item.ingredients.map(ingredient => `<span>${ingredient.name}: ${ingredient.amount}</span>`).join(', ')}</p>
+        </div>
+        <div class ="recipe-bottom">
+            ${item.difficulty === 'Gemakkelijk' ? `<p class="difficulty"><img src="./static/img/gemakkelijk.png" alt=""> ${item.difficulty}</p>` : ''}
+            ${item.difficulty === 'Gemiddeld' ? `<p class="difficulty"><img src="./static/img/gemiddeld.png" alt=""> ${item.difficulty}</p>` : ''}
+            ${item.difficulty === 'Moeilijk' ? `<p class="difficulty"><img src="./static/img/moeilijk.png" alt=""> ${item.difficulty}</p>` : ''}
+            <button class="detail-link">Instructies</button>
+        </div>
+    </a>
     `
 }
 
-function renderItem($element, item) {
+function renderRecipe($element, item) {
     $element.innerHTML += `
-    <a href="./detail.html?id=${item.id}" class="recipe__inner">
-        ${renderItemContent(item)}
-    </a>
+    ${renderItemContent(item)}
     `;
 };
 
@@ -69,9 +68,21 @@ export function renderEditDetailForm($element, item) {
 }
 
 // ---------------- RENDER RECIPES ------------------------------------------------------------------------------------------------------------------------
-export function renderData($element, data) {
+export function renderData($element, recipes) {
     $element.innerHTML = '';
-    data.forEach(item => {
-        renderItem($element, item)
+    recipes.forEach(recipe => {
+        renderRecipe($element, recipe)
     });
 };
+
+// ---------------- RENDER RANDOM RECIPES -----------------------------------------------------------------------------------------------------------------
+export function renderRandomData($element, recipes, amount) {
+    // Shuffle the recipes (https://www.freecodecamp.org/news/how-to-shuffle-an-array-of-items-using-javascript-or-typescript/)
+    const shuffledRecipes = recipes.sort(() => Math.random() - 0.5);
+    // Take the first 'amount' from the shuffled recipes array
+    const randomRecipes = shuffledRecipes.slice(0, amount);
+    $element.innerHTML = '';
+    randomRecipes.forEach(recipe => {
+        renderRecipe($element, recipe)
+    });
+}

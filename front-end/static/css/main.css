@@ -28,7 +28,7 @@
 
 body {
     font-family: 'Poppins';
-    background: var(--white);
+    background-color: var(--white);
     color: var(--pine);
     overflow-x: hidden;
 }
@@ -37,6 +37,7 @@ h1 {
     font-size: 2rem;
     line-height: 2.9rem;
     font-weight: 600;
+    padding-bottom: 3.4rem;
 }
 
 h2 {
@@ -46,9 +47,9 @@ h2 {
 }
 
 h3 {
-    font-size: 1.4rem;
-    line-height: 2rem;
-    font-weight: normal;
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    font-weight: 600;
 }
 
 p {
@@ -62,6 +63,7 @@ ul {
 }
 
 a {
+    font-size: 1.1rem;
     color: var(--pine);
     text-decoration: none;
 }
@@ -87,15 +89,15 @@ input, textarea, select {
 }
 
 .header__inner, .main__inner {
-    padding: 6rem 6.9rem;
+    padding: 3rem 3.45rem;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════════════
 ════════════════════════════════════════ HEADER ═════════════════════════════════════════
 ══════════════════════════════════════════════════════════════════════════════════════ */
-/* ----------------------------------- Home banner ----------------------------------- */
+
 header {
-    max-width: 27.5rem;
+    max-width: 21rem;
     width: 100%;
     background-color: var(--mint);
     position: relative;
@@ -105,7 +107,7 @@ header {
 
 .header__inner {
     position: fixed;
-    max-width: 27.5rem;
+    max-width: 21rem;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -113,14 +115,14 @@ header {
     background-image: url(../img/header_background.png);
     background-repeat: no-repeat;
     background-size: 150%;
-    background-position: -15rem 115%;
+    background-position: -12rem 110%;
 }
 
 /* -------------------------------------- Logo --------------------------------------- */
 
 .logo {
     max-width: 10rem;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
     transition: 0.3s ease;
 }
 
@@ -135,7 +137,7 @@ header {
     display: flex;
     gap: 1.7rem;
     align-items: center;
-    margin-bottom: 3.4rem;
+    margin-bottom: 1.7rem;
 }
 
 .recipes-link::before, .categories-link::before {
@@ -187,18 +189,18 @@ header {
 }
 
 .reset-filters {
-    margin-bottom: 1.7rem;
+    margin-bottom: 1rem;
 }
 
 .categories {
     display: flex;
     flex-direction: column;
-    height: 32vh;
+    height: 38vh;
     overflow-y: scroll;
 }
 
 .category {
-    margin-bottom: 1.7rem;
+    margin-bottom: 0.85rem;
     display: flex;
     align-items: center;
     gap: 1.7rem;
@@ -213,8 +215,7 @@ header {
     border-radius: 6px;
 }
 
-.category:hover, .reset-filters:hover,
-.category--active {
+.category:hover, .reset-filters:hover {
     text-decoration: underline;
 }
 
@@ -227,6 +228,7 @@ header {
 .socials {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.7rem;
 }
 
@@ -252,6 +254,11 @@ main {
     width: 100%;
 }
 
+.main__inner {
+    min-height: 100vh;
+    max-width: 86rem;
+}
+
 /* -------------------------------- Top navigation ----------------------------------- */
 
 .top-nav {
@@ -267,6 +274,19 @@ main {
     background-color: var(--mint);
     border-radius: 18px;
     padding: 0 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search::before {
+    content: '';
+    background-image: url(../img/svg/search-alt-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
 .search-bar {
@@ -333,4 +353,144 @@ main {
     width: 2.2rem;
     height: 2.2rem;
     margin: 0 auto;
+}
+
+/* ---------------------------------- Home banner ------------------------------------ */
+
+.banner {
+    padding-bottom: 4.2rem;
+    position: relative;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    background-image: url(../img/FoodWeb.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 34rem;
+    height: 34rem;
+    top: -3rem;
+    right: -2rem;
+}
+
+.banner__inner {
+    color: var(--white);
+    background-color: var(--turqoise);
+    border-radius: 33px;
+    padding: 2rem;
+}
+
+.banner__inner h1 {
+    max-width: 50%;
+    padding-bottom: 1rem;
+}
+
+.banner__inner p {
+    max-width: 40%;
+}
+
+/* -------------------------------- Random recepten ---------------------------------- */
+
+.random-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.7rem;
+}
+
+.recipe-teaser {
+    width: 45%;
+    max-width: 49%;
+    flex-grow: 1;
+    border: 3px solid var(--mint);
+    border-radius: 22px;
+    padding: 1.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 14 / 5;
+}
+
+.recipe-teaser:hover {
+    border-color: var(--turqoise);
+}
+
+.recipe-top, .recipe-middle {
+    margin-bottom: 1rem;
+}
+
+.recipe-middle {
+    padding-right: 1rem;
+}
+
+.recipe-top, .recipe-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick-info {
+    display: flex;
+    gap: 1rem;
+    opacity: 50%;
+}
+
+.quick-info p {
+    font-size: 0.9rem;
+}
+
+.servings, .cookingTime {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.servings::before, .cookingTime::before,
+.detail-link::after {
+    content: '';
+    background-image: url(../img/svg/group-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.cookingTime::before {
+    background-image: url(../img/svg/timer-svgrepo-com.svg);
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.difficulty {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.detail-link {
+    color: var(--white);
+    border-radius: 14px;
+    background-color: var(--turqoise);
+    padding: 0.4rem 1rem;
+    border: 3px solid var(--turqoise);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.recipe-teaser:hover .detail-link {
+    border-color: var(--mint);
+}
+
+.detail-link::after {
+    background-image: url(../img/svg/arrow-narrow-right-svgrepo-com.svg);
+}
+
+/* ---------------------------------- All recipes ------------------------------------ */
+
+.recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.7rem;
 }

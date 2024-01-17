@@ -3,17 +3,17 @@ const API_URL = 'http://localhost:8989/api/';
 
 // ---------------- IMPORT --------------------------------------------------------------------------------------------------------------------------------
 import { fetchData } from './helpers/fetch.js';
-import { renderData } from './helpers/rendering/recipes.js';
+import { renderRandomData } from './helpers/rendering/recipes.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
-const $recipesElement = document.getElementById('recipes');
+const $recipesElement = document.getElementById('randomRecipe');
 
 // ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
 // Start the application
 async function initialize () {
     fetchData(`${API_URL}recipes`, data => {
-        // Show all recipes
-        renderData($recipesElement, data);
+        // Show the two random recipes
+        renderRandomData($recipesElement, data, 2)
     });
 };
 
