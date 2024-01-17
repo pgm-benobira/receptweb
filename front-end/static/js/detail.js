@@ -8,7 +8,7 @@ import { putData } from './helpers/put.js';
 import { deleteData } from './helpers/delete.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
-const $mainElement = document.getElementById('main')
+const $detailContent = document.getElementById('detail')
 const $recipeDetailElement = document.getElementById('recipe-detail');
 const $editRecipeElement = document.getElementById('editRecipe');
 const $deleteRecipeElement = document.getElementById('deleteRecipe');
@@ -23,7 +23,7 @@ function getSelectedRecipeId() {
 // ---------------- EDIT RECIPE ---------------------------------------------------------------------------------------------------------------------------
 function showRecipeForm(recipe) {
     $editRecipeElement.addEventListener('click', () => {
-        renderEditDetailForm($mainElement, recipe);
+        renderEditDetailForm($detailContent, recipe);
 
         // Edit the recipe when clicking on the submit button
         const $editRecipeFormElement = document.getElementById('editRecipe');
@@ -70,14 +70,14 @@ function handleFormSubmit($form) {
 
     putData(`${API_URL}/${getSelectedRecipeId()}`, recipe).then(
         (onFulfilled) => {
-            $mainElement.innerHTML = ''
-            $mainElement.innerHTML = `
+            $detailContent.innerHTML = ''
+            $detailContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is gelukt!</p>
             `
         },
         (onRejected) => {
-            $mainElement.innerHTML = ''
-            $mainElement.innerHTML = `
+            $detailContent.innerHTML = ''
+            $detailContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is niet gelukt!</p>
             <a href="../index.html" role="button">Opnieuw proberen?</a>
             `

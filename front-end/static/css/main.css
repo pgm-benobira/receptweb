@@ -79,7 +79,7 @@ input, textarea, select {
     all: unset;
     border: 3px solid var(--mint);
     border-radius: 18px;
-    padding: 1rem;
+    padding: 1rem 1.4rem;
 }
 
 .body__inner {
@@ -148,8 +148,9 @@ header {
     height: 2.6rem;
 }
 
-.recipes-link:hover, .categories-link:hover {
-    text-decoration: underline;
+.recipes-link:hover::before, 
+.recipes-link--active::before {
+    background-image: url(../img/svg/list-box-filled-svgrepo-com.svg);
 }
 
 /* -------------------------------- Categories-link ---------------------------------- */
@@ -160,6 +161,11 @@ header {
 
 .categories-link::before {
     background-image: url(../img/svg/filter-line-svgrepo-com.svg);
+}
+
+.categories-link:hover::before,
+.categories-link--active::before {
+    background-image: url(../img/svg/filter-filled-svgrepo-com.svg);
 }
 
 /* ---------------------------------- Categories ------------------------------------- */
@@ -207,10 +213,7 @@ header {
     border-radius: 6px;
 }
 
-.category:hover, .reset-filters:hover {
-    text-decoration: underline;
-}
-
+.category:hover, .reset-filters:hover,
 .category--active {
     text-decoration: underline;
 }
@@ -247,4 +250,87 @@ header {
 
 main {
     width: 100%;
+}
+
+/* -------------------------------- Top navigation ----------------------------------- */
+
+.top-nav {
+    display: flex;
+    width: 100%;
+    padding-bottom: 6.8rem;
+    gap: 1.7rem;
+}
+
+.search {
+    max-width: 41rem;
+    width: 100%;
+    background-color: var(--mint);
+    border-radius: 18px;
+    padding: 0 1.4rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 1.1rem 0;
+}
+
+.explain-link {
+    border: 3px solid var(--mint);
+    border-radius: 18px;
+    color: var(--turqoise);
+    padding: 1rem 1.4rem;
+}
+
+.explain-link:hover {
+    border-color: var(--turqoise);
+}
+
+.cta {
+    background-color: var(--turqoise);
+    color: var(--white);
+    border: 3px solid var(--turqoise);
+    font-weight: 600;
+    padding: 1rem 1.4rem;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cta:hover {
+    border: 3px solid var(--mint);
+}
+
+.cta::before {
+    content: '';
+    background-image: url(../img/svg/chef-hat.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 1.7rem;
+    height: 1.7rem;
+    position: relative;
+    top: 4px;
+}
+
+.dark-light {
+    width: 4rem;
+    background-color: var(--pine);
+    border: 3px solid var(--pine);
+    border-radius: 18px;
+}
+
+.dark-light:hover {
+    border: 3px solid var(--mint);
+}
+
+.dark-light::before {
+    content: '';
+    background-image: url(../img/svg/moon-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0 auto;
 }

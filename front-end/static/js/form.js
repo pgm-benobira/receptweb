@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:8989/api/recipes';
 import { postData } from './helpers/post.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
-const $formPage = document.getElementById('formPage');
+const $formContent = document.getElementById('form');
 const $addRecipeFormElement = document.getElementById('addRecipe');
 
 // ---------------- HANDLE FORM ---------------------------------------------------------------------------------------------------------------------------
@@ -40,15 +40,15 @@ function handleFormSubmit($form) {
 
     postData(API_URL, recipe).then(
         (onFulfilled) => {
-            $formPage.innerHTML = ''
-            $formPage.innerHTML = `
+            $formContent.innerHTML = ''
+            $formContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> toevoegen is gelukt!</p>
             <a href="../recipeForm.html" role="button">Nog een recept toevoegen?</a>
             `
         },
         (onRejected) => {
-            $formPage.innerHTML = ''
-            $formPage.innerHTML = `
+            $formContent.innerHTML = ''
+            $formContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> toevoegen is niet gelukt!</p>
             <a href="../recipeForm.html" role="button">Opnieuw proberen?</a>
             `
