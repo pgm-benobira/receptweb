@@ -11,6 +11,12 @@ function renderItemContent(item) {
         <p>${item.servings}</p>
         <p><strong>📖  Instructies:</strong></p>
         <p>${item.instructions}</p>
+        <p><strong>⏱️  Kooktijd:</strong></p>
+        <p>${item.cookingTime}</p>
+        <p><strong>💥  Moeilijkheidsgraad:</strong></p>
+        <p>${item.difficulty}</p>
+        <p><strong>🍽️  Categorie:</strong></p>
+        <p>${item.category}</p>
     </article>
     `
 }
@@ -45,8 +51,8 @@ export function renderEditDetailForm($element, item) {
         <input type="text" id="recipeCategory" name="category" value="${item.category}" maxlength="40" required>
         <label for="recipeIngredients"><strong>Ingrediënten (ingredient, hoeveelheid):</strong></label>
         <textarea id="recipeIngredients" name="ingredients" required>${item.ingredients && item.ingredients.map(ingredient => `${ingredient.name}, ${ingredient.amount}`).join('\n')}</textarea>
-        <label for="recipeInstructions"><strong>Instructies (maximum 200 tekens):</strong></label>
-        <textarea id="recipeInstructions" name="instructions" maxlength="200" required>${item.instructions}</textarea>
+        <label for="recipeInstructions"><strong>Instructies (maximum 120 tekens):</strong></label>
+        <textarea id="recipeInstructions" name="instructions" maxlength="120" required>${item.instructions}</textarea>
         <label for="recipeCookingTime"><strong>Kooktijd (in minuten):</strong></label>
         <input type="number" id="recipeCookingTime" name="cookingTime" value="${item.cookingTime}" required>
         <label for="recipeDifficulty">Moeilijkheidsgraad:</label>
