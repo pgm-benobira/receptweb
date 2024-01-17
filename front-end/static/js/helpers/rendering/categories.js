@@ -1,7 +1,7 @@
 // ---------------- RENDER ONE CATEGORY -------------------------------------------------------------------------------------------------------------------
 function renderCategory(item) {
     return `
-    <button class="category-button" data-category="${item}">${item}</button>
+    <button class="category" data-category="${item}">${item}</button>
     `;
 };
 

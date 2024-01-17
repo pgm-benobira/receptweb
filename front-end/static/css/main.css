@@ -29,6 +29,7 @@
 body {
     font-family: 'Poppins';
     background: var(--white);
+    color: var(--pine);
     overflow-x: hidden;
 }
 
@@ -61,7 +62,7 @@ ul {
 }
 
 a {
-    color: black;
+    color: var(--pine);
     text-decoration: none;
 }
 
@@ -72,7 +73,6 @@ button {
 
 button:hover {
     cursor: pointer;
-    color: var(--turqoise);
 }
 
 input, textarea, select {
@@ -82,13 +82,169 @@ input, textarea, select {
     padding: 1rem;
 }
 
-.categories {
+.body__inner {
     display: flex;
-    flex-wrap: wrap;
 }
 
-.category-button {
-    max-width: 8rem;
+.header__inner, .main__inner {
+    padding: 6rem 6.9rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════════════
+════════════════════════════════════════ HEADER ═════════════════════════════════════════
+══════════════════════════════════════════════════════════════════════════════════════ */
+/* ----------------------------------- Home banner ----------------------------------- */
+header {
+    max-width: 27.5rem;
     width: 100%;
-    margin: 0.4rem;
+    background-color: var(--mint);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.header__inner {
+    position: fixed;
+    max-width: 27.5rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url(../img/header_background.png);
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: -15rem 115%;
+}
+
+/* -------------------------------------- Logo --------------------------------------- */
+
+.logo {
+    max-width: 10rem;
+    margin-bottom: 6rem;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    scale: 1.1;
+    transition: 0.3s ease;
+}
+
+/* ---------------------------------- Recipes-link ----------------------------------- */
+
+.recipes-link, .categories-link {
+    display: flex;
+    gap: 1.7rem;
+    align-items: center;
+    margin-bottom: 3.4rem;
+}
+
+.recipes-link::before, .categories-link::before {
+    content: '';
+    background-image: url(../img/svg/list-box-line-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+}
+
+.recipes-link:hover, .categories-link:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------- Categories-link ---------------------------------- */
+
+.categories-link {
+    margin-bottom: 1.7rem;
+}
+
+.categories-link::before {
+    background-image: url(../img/svg/filter-line-svgrepo-com.svg);
+}
+
+/* ---------------------------------- Categories ------------------------------------- */
+
+.categories__wrapper {
+    margin-left: 2.6rem;
+}
+
+.categories__wrapper::after {
+    content: '';
+    background-image: url(../img/svg/double-arrow-right-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-top: 2.6rem;
+    margin-left: 4rem;
+}
+
+.reset-filters {
+    margin-bottom: 1.7rem;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    height: 32vh;
+    overflow-y: scroll;
+}
+
+.category {
+    margin-bottom: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+}
+
+.category::before {
+    content: '';
+    display: block;
+    width: 1.7rem;
+    height: 1.7rem;
+    border: 3px solid var(--pine);
+    border-radius: 6px;
+}
+
+.category:hover, .reset-filters:hover {
+    text-decoration: underline;
+}
+
+.category--active {
+    text-decoration: underline;
+}
+
+.category--active::before {
+    background-color: var(--pine);
+}
+
+/* ----------------------------------- Socials --------------------------------------- */
+
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+}
+
+.social {
+    max-width: 1.7rem;
+    width: 100%;
+    opacity: 50%;
+}
+
+.social--youtube {
+    max-width: 2.6rem;
+}
+
+.social:hover {
+    opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════════════
+═════════════════════════════════════════ MAIN ══════════════════════════════════════════
+══════════════════════════════════════════════════════════════════════════════════════ */
+
+main {
+    width: 100%;
 }

@@ -17,17 +17,27 @@ function filterRecipesByCategory(recipes, selectedCategory) {
     return recipes.filter((recipe) => recipe.category === selectedCategory)
 };
 
+function removeActiveCateogry() {
+    const $previouslyActiveCategory = document.querySelector('.category--active');
+    if ($previouslyActiveCategory) {
+        $previouslyActiveCategory.classList.remove('category--active');
+    }
+}
+
 function resetRecipesFitlter(data) {
     $resetButton.addEventListener('click', () => {
+        removeActiveCateogry()
         renderData($recipesElement, data);
     });
 };
 
 function showFilteredRecipes(data) {
     // Add click event listener to each category button
-    const $categoryButtons = document.querySelectorAll('.category-button');
+    const $categoryButtons = document.querySelectorAll('.category');
     $categoryButtons.forEach(($categoryButton) => {
         $categoryButton.addEventListener('click', () => {
+            removeActiveCateogry()
+            $categoryButton.classList.add('category--active');
             const selectedCategory = $categoryButton.dataset.category; // Assuming data-category attribute contains the category value
             const filteredRecipes = filterRecipesByCategory(data, selectedCategory);
             // Show the filtered recipes
