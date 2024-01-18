@@ -43,14 +43,14 @@ function handleFormSubmit($form) {
             $formContent.innerHTML = ''
             $formContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> toevoegen is gelukt!</p>
-            <a href="../recipeForm.html" role="button">Nog een recept toevoegen?</a>
+            <a class="cta" href="../recipeForm.html">Nog een recept toevoegen?</a>
             `
         },
         (onRejected) => {
             $formContent.innerHTML = ''
             $formContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> toevoegen is niet gelukt!</p>
-            <a href="../recipeForm.html" role="button">Opnieuw proberen?</a>
+            <a class="cta" href="../recipeForm.html">Opnieuw proberen?</a>
             `
         }
     )

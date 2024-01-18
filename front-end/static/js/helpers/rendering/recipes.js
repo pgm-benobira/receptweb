@@ -34,7 +34,10 @@ export function renderDetailItem($element, item) {
     $element.innerHTML += `
     <section href="./detail.html?id=${item.id}" class="recipe-detail">
         <div class="recipe-top">
-            <h1>${item.title}</h1>
+            <div>
+                <h1>${item.title}</h1>
+                <p>Categorie: ${item.category}</p>
+            </div>
             <button onclick="history.back()" class="go-back">Terug</button>
         </div>
         <div class="recipe-detail__content">
@@ -62,28 +65,53 @@ export function renderDetailItem($element, item) {
 export function renderEditDetailForm($element, item) {
     $element.innerHTML = '';
     $element.innerHTML = `
-    <form id="editRecipe">
-        <button type="submit">Aanpassingen bevestigen</button>
-        <label for="recipeTitle"><strong>Naam recept:</strong></label>
-        <input type="text" id="recipeTitle" name="title" value="${item.title}" maxlength="40" required>
-        <label for="recipeCategory"><strong>Categorie:</strong></label>
-        <input type="text" id="recipeCategory" name="category" value="${item.category}" maxlength="40" required>
-        <label for="recipeIngredients"><strong>Ingrediënten (ingredient, hoeveelheid):</strong></label>
-        <textarea id="recipeIngredients" name="ingredients" required>${item.ingredients && item.ingredients.map(ingredient => `${ingredient.name}, ${ingredient.amount}`).join('\n')}</textarea>
-        <label for="recipeInstructions"><strong>Instructies (maximum 120 tekens):</strong></label>
-        <textarea id="recipeInstructions" name="instructions" maxlength="120" required>${item.instructions}</textarea>
-        <label for="recipeCookingTime"><strong>Kooktijd (in minuten):</strong></label>
-        <input type="number" id="recipeCookingTime" name="cookingTime" value="${item.cookingTime}" required>
-        <label for="recipeDifficulty">Moeilijkheidsgraad:</label>
-        <select id="recipeDifficulty" name="difficulty" required>
-            <option value="Gemakkelijk" ${item.difficulty === 'Gemakkelijk' ? 'selected' : ''}>Gemakkelijk</option>
-            <option value="Gemiddeld" ${item.difficulty === 'Gemiddeld' ? 'selected' : ''}>Gemiddeld</option>
-            <option value="Moeilijk" ${item.difficulty === 'Moeilijk' ? 'selected' : ''}>Moeilijk</option>
-        </select>
-        <label for="recipeServings"><strong>Voor hoeveel mensen:</strong></label>
-        <input type="number" id="recipeServings" name="servings" value="${item.servings}" required>
-    </form>
-    <a href="./detail.html?id=${item.id}">Terruggaan</a>
+    <section class="form__wrapper" id="form">
+        <div class="recipe-top">
+            <h1>Recept aanpassen</h1>
+            <a href="./detail.html?id=${item.id}" class="go-back go-back--cancel">Annuleren</a>
+        </div>
+        <form class="form" id="editRecipe">
+            <section class="form__top">
+                <div>
+                    <label for="recipeTitle"><strong>Naam recept:</strong></label>
+                    <input type="text" id="recipeTitle" name="title" value="${item.title}" maxlength="40" required>
+                </div>
+                <div>
+                    <label for="recipeCategory"><strong>Categorie:</strong></label>
+                    <input type="text" id="recipeCategory" name="category" value="${item.category}" maxlength="40" required>
+                </div>
+            </section>
+            <section class="form__middle">
+                <div>
+                    <label for="recipeIngredients"><strong>Ingrediënten (ingredient, hoeveelheid):</strong></label>
+                    <textarea id="recipeIngredients" name="ingredients" required>${item.ingredients && item.ingredients.map(ingredient => `${ingredient.name}, ${ingredient.amount}`).join('\n')}</textarea>
+                </div>
+                <div>
+                    <label for="recipeInstructions"><strong>Instructies (maximum 120 tekens):</strong></label>
+                    <textarea id="recipeInstructions" name="instructions" maxlength="120" required>${item.instructions}</textarea>
+                </div>
+            </section>
+            <section class="form__bottom">
+                <div>
+                    <label for="recipeCookingTime"><strong>Kooktijd (in minuten):</strong></label>
+                    <input type="number" id="recipeCookingTime" name="cookingTime" value="${item.cookingTime}" required>
+                </div>
+                <div>
+                    <label for="recipeDifficulty"><strong>Moeilijkheidsgraad:</strong></label>
+                    <select id="recipeDifficulty" name="difficulty" required>
+                        <option value="Gemakkelijk" ${item.difficulty === 'Gemakkelijk' ? 'selected' : ''}>Gemakkelijk</option>
+                        <option value="Gemiddeld" ${item.difficulty === 'Gemiddeld' ? 'selected' : ''}>Gemiddeld</option>
+                        <option value="Moeilijk" ${item.difficulty === 'Moeilijk' ? 'selected' : ''}>Moeilijk</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="recipeServings"><strong>Voor hoeveel mensen:</strong></label>
+                    <input type="number" id="recipeServings" name="servings" value="${item.servings}" required>
+                </div>
+                <button class="cta" type="submit">Aanpassen</button>
+            </section>
+        </form>
+    </section>
     `;
 }
 

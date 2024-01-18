@@ -79,7 +79,7 @@ function handleFormSubmit($form) {
             $detailContent.innerHTML = ''
             $detailContent.innerHTML = `
             <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is niet gelukt!</p>
-            <a href="../index.html" role="button">Opnieuw proberen?</a>
+            <a class="cta" href="../index.html" role="button">Opnieuw proberen?</a>
             `
         }
     )

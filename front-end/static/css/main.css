@@ -26,6 +26,10 @@
 ════════════════════════════════════════ GENERAL ════════════════════════════════════════
 ══════════════════════════════════════════════════════════════════════════════════════ */
 
+*::selection {
+    background-color: hsl(155, 53%, 76%);
+}
+
 body {
     font-family: 'Poppins';
     background-color: var(--mint);
@@ -70,6 +74,7 @@ a {
 
 button {
     all: unset;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -79,6 +84,7 @@ button:hover {
 
 input, textarea, select {
     all: unset;
+    box-sizing: border-box;
     border: 3px solid var(--mint);
     border-radius: 18px;
     padding: 1rem 1.4rem;
@@ -509,12 +515,15 @@ main {
 }
 
 .recipe-detail .recipe-top {
-    padding-bottom: 3.4rem;
+    margin-bottom: 3.4rem;
+    align-items: flex-start;
 }
 
 .recipe-detail h1 {
     padding-bottom: 0;
 }
+
+.recipe-detail h
 
 .go-back {
     display: flex;
@@ -551,6 +560,12 @@ main {
     text-decoration: underline;
 }
 
+.go-back {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 .recipe-detail .recipe-middle div {
     width: 50%;
 }
@@ -569,4 +584,52 @@ main {
 .recipe-action {
     display: flex;
     gap: 1.7rem;
+}
+
+/* ═══════════════════════════════════ FORM.HTML ═════════════════════════════════════ */
+
+/* ---------------------------------- Recipe form ------------------------------------ */
+
+.form__wrapper h1 {
+    padding-bottom: 0;
+}
+
+.form__wrapper .recipe-top {
+    margin-bottom: 3.4rem;
+}
+
+.go-back--cancel {
+    font-weight: 600;
+}
+
+.go-back--cancel::after {
+    background-image: url(../img/svg/cross-svgrepo-com.svg);
+}
+
+.form__wrapper label {
+    display: block;
+    margin: 1.7rem 0;
+    width: 100%;
+}
+
+.form__wrapper input, .form__wrapper textarea, .form__wrapper select {
+    width: 100%;
+}
+
+.form__wrapper textarea {
+    resize: vertical;
+}
+
+.form__top, .form__middle, .form__bottom {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.7rem;
+}
+
+.form__middle {
+    align-items: flex-start;
+}
+
+.form__top div, .form__middle div, .form__bottom div {
+    width: 100%;
 }
