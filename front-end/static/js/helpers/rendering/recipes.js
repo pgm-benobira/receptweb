@@ -32,9 +32,29 @@ function renderRecipe($element, item) {
 export function renderDetailItem($element, item) {
     $element.innerHTML = '';
     $element.innerHTML += `
-    <div class="recipe__inner">
-        ${renderItemContent(item)}
-    </div>
+    <section href="./detail.html?id=${item.id}" class="recipe-detail">
+        <div class="recipe-top">
+            <h1>${item.title}</h1>
+            <button onclick="history.back()" class="go-back">Terug</button>
+        </div>
+        <div class="recipe-detail__content">
+            <div class="recipe-middle">
+                <div class="ingredietns__wrapper">
+                    <p><strong>Wat heb je nodig?</strong></p> ${item.ingredients.map(ingredient => `<p>${ingredient.name}: ${ingredient.amount}</p>`).join('')}
+                </div>
+                <div class="instrcutions__wrapper">
+                    <p class="instructions"><strong>Instrcuties:</strong></p><p class="instructions">${item.instructions}</p>
+                </div>
+            </div>
+            <div class="recipe-bottom">
+                <p class="servings">Voor ${item.servings} personen</p>
+                <p class="cookingTime">Kooktijd: ${item.cookingTime} minuten</p>
+                ${item.difficulty === 'Gemakkelijk' ? `<p class="difficulty"><img src="./static/img/gemakkelijk.png" alt=""> ${item.difficulty}</p>` : ''}
+                ${item.difficulty === 'Gemiddeld' ? `<p class="difficulty"><img src="./static/img/gemiddeld.png" alt=""> ${item.difficulty}</p>` : ''}
+                ${item.difficulty === 'Moeilijk' ? `<p class="difficulty"><img src="./static/img/moeilijk.png" alt=""> ${item.difficulty}</p>` : ''}
+            </div>
+        </div>
+    </section>
     `;
 };
 
@@ -45,7 +65,7 @@ export function renderEditDetailForm($element, item) {
     <form id="editRecipe">
         <button type="submit">Aanpassingen bevestigen</button>
         <label for="recipeTitle"><strong>Naam recept:</strong></label>
-        <input type="text" id="recipeTitle" name="title" value="${item.title}" maxlength="50" required>
+        <input type="text" id="recipeTitle" name="title" value="${item.title}" maxlength="40" required>
         <label for="recipeCategory"><strong>Categorie:</strong></label>
         <input type="text" id="recipeCategory" name="category" value="${item.category}" maxlength="40" required>
         <label for="recipeIngredients"><strong>Ingrediënten (ingredient, hoeveelheid):</strong></label>
