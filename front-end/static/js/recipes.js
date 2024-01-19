@@ -5,6 +5,7 @@ const API_URL = 'http://localhost:8989/api/';
 import { fetchData } from './helpers/fetch.js';
 import { renderData } from './helpers/rendering/recipes.js';
 import { renderCategories } from './helpers/rendering/categories.js';
+import { changeToDarkMode } from './helpers/dark.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $recipesElement = document.getElementById('recipes');
@@ -90,6 +91,8 @@ async function initialize () {
         // Show filtered recipes
         showFilteredRecipes(data);
     });
+    // Change to dark mode
+    changeToDarkMode();
 };
 
 // Call the function for the application

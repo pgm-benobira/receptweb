@@ -3,6 +3,7 @@ const API_URL = 'http://localhost:8989/api/recipes';
 
 // ---------------- IMPORT --------------------------------------------------------------------------------------------------------------------------------
 import { postData } from './helpers/post.js';
+import { changeToDarkMode } from './helpers/dark.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $formContent = document.getElementById('form');
@@ -67,6 +68,8 @@ function submitEvent($form) {
 // Start the application
 async function initialize () {
     submitEvent($addRecipeFormElement);
+    // Change to dark mode
+    changeToDarkMode();
 };
 
 // Call the function for the application

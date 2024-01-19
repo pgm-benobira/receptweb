@@ -120,15 +120,15 @@ header {
     justify-content: space-between;
     background-image: url(../img/header_background.png);
     background-repeat: no-repeat;
-    background-size: 150%;
-    background-position: -12rem 110%;
+    background-size: 30rem;
+    background-position: -12rem 38rem;
 }
 
 /* -------------------------------------- Logo --------------------------------------- */
 
 .logo {
     max-width: 10rem;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     transition: 0.3s ease;
 }
 
@@ -364,6 +364,15 @@ main {
     margin: 0 auto;
 }
 
+.dark-mode {
+    background-color: var(--white);
+    border-color: var(--white);
+}
+
+.dark-mode::before {
+    background-image: url(../img/svg/sun-svgrepo-com.svg);
+}
+
 /* ---------------------------------- Home banner ------------------------------------ */
 
 .banner {
@@ -523,14 +532,6 @@ main {
     padding-bottom: 0;
 }
 
-.recipe-detail h
-
-.go-back {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .go-back::after {
     content: '';
     background-image: url(../img/svg/arrow-narrow-right-svgrepo-com.svg);
@@ -632,4 +633,41 @@ main {
 
 .form__top div, .form__middle div, .form__bottom div {
     width: 100%;
+}
+
+/* ═══════════════════════════════════ DARK MODE ═════════════════════════════════════ */
+
+.dark, .dark a, .dark button {
+    color: var(--white);
+}
+
+.dark header a::before, .dark header img, .dark p::before,
+.dark .categories__wrapper::after {
+    filter: invert(1) brightness(300%);
+}
+
+.dark .go-back::after {
+    filter: none;
+}
+
+.dark header, .dark .cta, .dark .recipe-teaser button, .dark .banner__inner,
+.dark .recipe-detail__content .recipe-middle {
+    background-color: var(--pine);
+    border-color: var(--pine);
+}
+
+.dark main {
+    background-color: var(--dark);
+}
+
+.dark .cta:hover {
+    border-color: var(--turqoise);
+}
+
+.dark .category::before {
+    border-color: var(--white);
+}
+
+.dark .category--active::before {
+    background-color: var(--white);
 }

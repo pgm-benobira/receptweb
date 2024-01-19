@@ -6,6 +6,7 @@ import { fetchData } from './helpers/fetch.js';
 import { renderDetailItem, renderEditDetailForm } from './helpers/rendering/recipes.js';
 import { putData } from './helpers/put.js';
 import { deleteData } from './helpers/delete.js';
+import { changeToDarkMode } from './helpers/dark.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $detailContent = document.getElementById('detail')
@@ -94,7 +95,7 @@ async function deleteRecipe() {
             // Delete the recipe
             await deleteData(`${API_URL}/${getSelectedRecipeId()}`);
             // Go back to home
-            window.location.href = 'index.html';
+            window.location.href = '/';
         }
     });
 };
@@ -111,6 +112,8 @@ async function initialize () {
         // Show recipe form
         showRecipeForm(data)
     });
+    // Change to dark mode
+    changeToDarkMode();
 };
 
 // Call the function for the application
