@@ -9,7 +9,7 @@ import { changeToDarkMode } from './helpers/dark.js';
 
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $recipesElement = document.getElementById('recipes');
-const $formElement = document.getElementById('filterRecipe');
+const $searchBar = document.getElementById('recipeQuery');
 const $categoriesElement = document.getElementById('categories');
 const $resetButton = document.getElementById('resetFilters');
 
@@ -49,31 +49,13 @@ function showFilteredRecipes(data) {
     resetRecipesFitlter(data);
 };
 
-// ---------------- HANDLE FORM ---------------------------------------------------------------------------------------------------------------------------
-function filterRecipesByValue(recipes, value) {
-    return recipes.filter((recipe) => {
-        return (
-            recipe.title.toLowerCase().includes(value.toLowerCase()) ||
-            recipe.category.toLowerCase().includes(value.toLowerCase())
-        )
-    });
-};
+// ---------------- GET URL PARAMS ------------------------------------------------------------------------------------------------------------------------
+const urlParams = new URLSearchParams(window.location.search);
+const filterValue = urlParams.get('filter');
 
-function handleFormSubmit(recipes, $form) {
-    const formData = new FormData($form);
-    const formDataValue = formData.get('filter');
-    const filteredRecipesData = filterRecipesByValue(recipes, formDataValue);
-    if (filteredRecipesData.length === 0) {
-        return $recipesElement.innerHTML = `<p>Geen resultaten voor "<strong>${formDataValue}</strong>"</p>`
-    }
-    return renderData($recipesElement, filteredRecipesData);
-};
-
-function submitEvent(recipes) {
-    $formElement.addEventListener('submit', (ev) => {
-        ev.preventDefault();
-        handleFormSubmit(recipes, $formElement);
-    })
+// ---------------- CHANGE INPUT VALUE --------------------------------------------------------------------------------------------------------------------
+function changeInputValue(value) {
+    return $searchBar.value = value;
 };
 
 // ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
@@ -83,16 +65,31 @@ async function initialize () {
         // Show all categories
         renderCategories($categoriesElement, data);
     });
-    fetchData(`${API_URL}recipes`, data => {
-        // Handling the form event
-        submitEvent(data);
-        // Show all recipes
-        renderData($recipesElement, data);
-        // Show filtered recipes
-        showFilteredRecipes(data);
+    fetchData(`${API_URL}recipes?filter=${filterValue}`, data => {
+        if (filterValue !== null) { // filterValue is given and not null
+            if (data.length === 0) { // Found no recipe as match for the filterValue
+                return $recipesElement.innerHTML = `
+                <p>Geen resultaten voor <strong>"${filterValue}"</strong></p>
+                `
+            } else { // Recipes found for the filterValue
+                // Render the filtered recipes
+                renderData($recipesElement, data)
+                // Show filtered recipes
+                showFilteredRecipes(data)
+            }
+        } else { // No filter given?
+            // Show al the recipes
+            fetchData(`${API_URL}recipes`, data => {
+                renderData($recipesElement, data)
+                // Show filtered recipes
+                showFilteredRecipes(data)
+            })
+        }
     });
     // Change to dark mode
     changeToDarkMode();
+    // Show the filterValue in the input field
+    changeInputValue(filterValue)
 };
 
 // Call the function for the application

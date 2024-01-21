@@ -37,8 +37,21 @@ async function getRecipes(request, response) {
     try {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
-        // Give back the recipes
-        response.json(recipes);
+        const value = request.query.filter;
+        console.log(value);
+        if (value) {
+            const filteredRecipes = recipes.filter(recipe => {
+                return (
+                    recipe.title.toLowerCase().includes(value.toLowerCase()) ||
+                    recipe.category.toLowerCase().includes(value.toLowerCase())
+                )
+            });
+            // Give back the filtered recipes
+            response.json(filteredRecipes);
+        } else {
+            // No filter parameter? return all recipes
+            response.json(recipes);
+        }
     } catch (error) {
         showErrorMessage(response, error);
     }

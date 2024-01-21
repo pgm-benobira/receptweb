@@ -9,7 +9,6 @@ import { changeToDarkMode } from './helpers/dark.js';
 // ---------------- ELEMENTS ------------------------------------------------------------------------------------------------------------------------------
 const $recipesElement = document.getElementById('randomRecipe');
 
-
 // ---------------- INITIALIZE APPLICATION ----------------------------------------------------------------------------------------------------------------
 // Start the application
 async function initialize () {

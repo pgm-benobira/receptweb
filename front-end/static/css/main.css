@@ -190,7 +190,7 @@ header {
     display: block;
     width: 2.6rem;
     height: 2.6rem;
-    margin-top: 2.6rem;
+    margin-top: 1.7rem;
     margin-left: 4rem;
 }
 
@@ -323,7 +323,9 @@ main {
     border-radius: 18px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
+    max-width: 22rem;
 }
 
 .cta:hover {
@@ -635,10 +637,18 @@ main {
     width: 100%;
 }
 
+.feedback {
+    padding-bottom: 1.7rem;
+}
+
 /* ═══════════════════════════════════ DARK MODE ═════════════════════════════════════ */
 
 .dark, .dark a, .dark button {
     color: var(--white);
+}
+
+.dark .search-bar {
+    color: var(--pine);
 }
 
 .dark header a::before, .dark header img, .dark p::before,

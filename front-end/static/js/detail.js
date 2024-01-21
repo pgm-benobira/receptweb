@@ -73,13 +73,13 @@ function handleFormSubmit($form) {
         (onFulfilled) => {
             $detailContent.innerHTML = ''
             $detailContent.innerHTML = `
-            <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is gelukt!</p>
+            <p class="feedback">Recept: <strong>"${recipeTitle}"</strong> aanpassen is gelukt!</p>
             `
         },
         (onRejected) => {
             $detailContent.innerHTML = ''
             $detailContent.innerHTML = `
-            <p>Recept: <strong>"${recipeTitle}"</strong> aanpassen is niet gelukt!</p>
+            <p class="feedback">Recept: <strong>"${recipeTitle}"</strong> aanpassen is niet gelukt!</p>
             <a class="cta" href="../index.html" role="button">Opnieuw proberen?</a>
             `
         }
