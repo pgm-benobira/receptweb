@@ -18,7 +18,7 @@ function handleFormSubmit($form) {
     const recipeIngredients = formData.get('ingredients');
     // Parse ingredients input for the json
     const recipeIngredientsArray = recipeIngredients.split('\n').map(function (line) {
-        const parts = line.split(', ');
+        const parts = line.split(': ');
         return {
             name: parts[0],
             amount: parts[1]

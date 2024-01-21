@@ -38,7 +38,6 @@ async function getRecipes(request, response) {
         // Get the recipes from the file
         const recipes = await getRecipesFromFile(recipesFilePath);
         const value = request.query.filter;
-        console.log(value);
         if (value) {
             const filteredRecipes = recipes.filter(recipe => {
                 return (

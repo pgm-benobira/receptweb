@@ -621,6 +621,7 @@ main {
 
 .form__wrapper textarea {
     resize: vertical;
+    white-space: pre-wrap;
 }
 
 .form__top, .form__middle, .form__bottom {

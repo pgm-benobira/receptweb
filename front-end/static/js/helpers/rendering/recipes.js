@@ -83,8 +83,8 @@ export function renderEditDetailForm($element, item) {
             </section>
             <section class="form__middle">
                 <div>
-                    <label for="recipeIngredients"><strong>Ingrediënten (ingredient, hoeveelheid):</strong></label>
-                    <textarea id="recipeIngredients" name="ingredients" required>${item.ingredients && item.ingredients.map(ingredient => `${ingredient.name}, ${ingredient.amount}`).join('\n')}</textarea>
+                    <label for="recipeIngredients"><strong>Ingrediënten (ingredient: hoeveelheid):</strong></label>
+                    <textarea id="recipeIngredients" name="ingredients" required>${item.ingredients && item.ingredients.map(ingredient => `${ingredient.name}: ${ingredient.amount}`).join('\n')}</textarea>
                 </div>
                 <div>
                     <label for="recipeInstructions"><strong>Instructies (maximum 120 tekens):</strong></label>
