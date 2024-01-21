@@ -182,18 +182,6 @@ header {
     margin-left: 2.6rem;
 }
 
-.categories__wrapper::after {
-    content: '';
-    background-image: url(../img/svg/double-arrow-right-svgrepo-com.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    display: block;
-    width: 2.6rem;
-    height: 2.6rem;
-    margin-top: 1.7rem;
-    margin-left: 4rem;
-}
-
 .reset-filters {
     margin-bottom: 1rem;
 }
@@ -227,6 +215,16 @@ header {
 
 .category--active::before {
     background-color: var(--pine);
+}
+
+.scroll-down {
+    display: block;
+    margin: 1rem auto;
+    width: 2.6rem;
+}
+
+.scroll-down:hover {
+    scale: 1.2;
 }
 
 /* ----------------------------------- Socials --------------------------------------- */
@@ -304,6 +302,9 @@ main {
 }
 
 .secondary {
+    width: 100%;
+    max-width: 12rem;
+    text-align: center;
     border: 3px solid var(--mint);
     border-radius: 18px;
     color: var(--turqoise);
@@ -315,6 +316,9 @@ main {
 }
 
 .cta {
+    width: 100%;
+    max-width: 18rem;
+    text-align: center;
     background-color: var(--turqoise);
     color: var(--white);
     border: 3px solid var(--turqoise);
@@ -325,7 +329,6 @@ main {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    max-width: 22rem;
 }
 
 .cta:hover {
@@ -345,7 +348,8 @@ main {
 }
 
 .dark-light {
-    width: 4rem;
+    width: 100%;
+    max-width: 4rem;
     background-color: var(--pine);
     border: 3px solid var(--pine);
     border-radius: 18px;

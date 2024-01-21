@@ -49,6 +49,14 @@ function showFilteredRecipes(data) {
     resetRecipesFitlter(data);
 };
 
+// ---------------- SCROLL DOWN ---------------------------------------------------------------------------------------------------------------------------
+function scrollEvents() {
+    const $scrollDownElement = document.getElementById('scrollDown');
+    $scrollDownElement.addEventListener('click', () => {
+        $categoriesElement.scrollBy(0, 150);
+    });
+};
+
 // ---------------- GET URL PARAMS ------------------------------------------------------------------------------------------------------------------------
 const urlParams = new URLSearchParams(window.location.search);
 const filterValue = urlParams.get('filter');
@@ -90,6 +98,8 @@ async function initialize () {
     changeToDarkMode();
     // Show the filterValue in the input field
     changeInputValue(filterValue)
+    // Scroll down the categories
+    scrollEvents()
 };
 
 // Call the function for the application

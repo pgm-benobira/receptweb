@@ -44,7 +44,7 @@ function handleFormSubmit($form) {
             $formContent.innerHTML = ''
             $formContent.innerHTML = `
             <p class="feedback">Recept: <strong>"${recipeTitle}"</strong> toevoegen is gelukt!</p>
-            <a class="cta" href="../recipeForm.html">Nog een recept toevoegen?</a>
+            <a class="cta" href="../recipeForm.html">Nog een recept?</a>
             `
         },
         (onRejected) => {
