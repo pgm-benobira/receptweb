@@ -106,6 +106,29 @@ input, textarea, select {
     }
 }
 
+@media (max-width: 44rem) {
+    h1 {
+        font-size: 1.7rem;
+        line-height: 2.6rem;
+        padding-bottom: 1.7rem;
+    }
+    
+    h2 {
+        font-size: 1.1rem;
+        line-height: 1.7rem;
+    }
+    
+    h3 {
+        font-size: 0.9rem;
+        line-height: 1.9rem;
+    }
+    
+    p, a, button {
+        font-size: 0.8rem;
+        line-height: 1.9rem;
+    }
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════════════
 ════════════════════════════════════════ HEADER ═════════════════════════════════════════
 ══════════════════════════════════════════════════════════════════════════════════════ */
@@ -327,11 +350,21 @@ header {
     .main-nav {
         gap: 2rem;
     }
+    .header__inner, .main__inner {
+        padding: 1rem 1rem;
+    }
     .recipes-link::before, .categories-link::before {
         content: none;
     }
     .logo {
         max-width: 7rem;
+    }
+}
+
+@media (max-width: 25rem) {
+    .main-nav {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
 
@@ -658,6 +691,13 @@ main {
 }
 
 @media (max-width: 44rem) {
+    .top-nav {
+        padding-bottom: 4rem;
+        gap: 1rem;
+    }
+    .recipe-teaser {
+        padding: 1rem;
+    }
     .quick-info {
         display: none;
     }
@@ -666,6 +706,19 @@ main {
     }
     .secondary {
         display: none;
+    }
+}
+
+@media (max-width: 25rem) {
+    .recipe-top {
+        flex-direction: column-reverse;
+    }
+    .recipe-bottom {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .detail-link {
+        max-width: 8rem;
     }
 }
 
@@ -786,6 +839,12 @@ main {
     }
 }
 
+@media (max-width: 25rem) {
+    .recipe-detail .recipe-top {
+        margin-bottom: 1.7rem;
+    }
+}
+
 /* ═══════════════════════════════════ FORM.HTML ═════════════════════════════════════ */
 
 /* ---------------------------------- Recipe form ------------------------------------ */
@@ -845,6 +904,16 @@ main {
     .form__top, .form__middle, .form__bottom {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 25rem) {
+    .go-back--cancel {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    .form__wrapper .recipe-top {
+        margin-bottom: 1.7rem;
     }
 }
 
